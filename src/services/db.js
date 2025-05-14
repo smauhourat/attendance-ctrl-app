@@ -83,7 +83,7 @@ export const saveAttendance = async (attendance) => {
     return tx.done;
 };
 
-// // Función mejorada para guardar asistencias desde MongoDB
+// Función mejorada para guardar asistencias desde MongoDB
 // export const saveAttendancesFromMongo = async (attendances) => {
 //     const db = await initDB();
 //     const tx = db.transaction(storeNames.ATTENDANCES, 'readwrite');
