@@ -2,7 +2,7 @@ export function register(config) {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
+      console.log('swUrl =>', swUrl)
       navigator.serviceWorker.register(swUrl)
         .then(registration => {
           console.log('ServiceWorker registration successful');

@@ -11,13 +11,31 @@ const ASSETS_TO_CACHE = [
   '/logo512.png'
 ];
 
+// self.addEventListener('install', (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME)
+//       .then((cache) => {
+//         console.log('Opened cache');
+//         return cache.addAll(ASSETS_TO_CACHE);
+//       })
+//   );
+// });
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Opened cache');
-        return cache.addAll(ASSETS_TO_CACHE);
+        console.log('Cache abierto');
+        // Manejo individual de cada recurso
+        return Promise.all(
+          ASSETS_TO_CACHE.map((asset) => {
+            return cache.add(asset).catch((err) => {
+              console.warn(`No se pudo cachear ${asset}:`, err);
+            });
+          })
+        );
       })
+      .then(() => self.skipWaiting())
   );
 });
 
