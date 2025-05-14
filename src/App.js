@@ -46,9 +46,9 @@ function App() {
           }
 
           // Fetch fresh data
-          console.log('llama a fetchEvents')
+          // console.log('llama a fetchEvents')
           const serverEvents = await fetchEvents();
-          console.log('serverEvents =>', serverEvents)
+          // console.log('serverEvents =>', serverEvents)
           setEvents(serverEvents);
 
           // Save to local DB

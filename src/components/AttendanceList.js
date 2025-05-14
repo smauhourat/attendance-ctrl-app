@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PersonCard from './PersonCard';
 import SearchBar from './SearchBar';
-import { markAttendance as markAttendanceApi } from '../services/api';
+import { markAttendance as markAttendanceApi, getEventAttendees as getEventWithAttendeesAPI } from '../services/api';
 import { saveAttendance, getLocalEventWithAttendees } from '../services/db';
 
 const AttendanceList = ({ event, onBack, isOnline }) => {
@@ -10,6 +10,7 @@ const AttendanceList = ({ event, onBack, isOnline }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log('event in AttendanceList =>', event)
     useEffect(() => {
         const loadAttendees = async () => {
             setIsLoading(true);
@@ -18,7 +19,8 @@ const AttendanceList = ({ event, onBack, isOnline }) => {
 
                 if (isOnline) {
                     // En producción, aquí harías una llamada a la API real
-                    eventData = event;
+                    //eventData = event;
+                    eventData = await getEventWithAttendeesAPI(event.id);
                 } else {
                     eventData = await getLocalEventWithAttendees(event.id);
                 }

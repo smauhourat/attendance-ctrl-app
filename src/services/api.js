@@ -111,3 +111,4 @@ export const syncAttendances = async (pendingAttendances) => {
 
     return response.json();
 };
+
